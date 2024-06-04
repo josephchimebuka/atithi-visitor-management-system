@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 // import { v4 as uuidv4 } from "uuid";
 import propTypes from "prop-types";
 
@@ -16,7 +16,8 @@ class AdminDashboard extends Component {
       // data: [],
       pageSize: 20,
       currentPage: 1,
-      searchQuery: ""
+      searchQuery: "",
+      navigate: useNavigate()
     };
   }
 
@@ -69,7 +70,7 @@ class AdminDashboard extends Component {
     const dataToMap = paginate(filteredData, currentPage, pageSize);
 
     if (!isAuth) {
-      return <Redirect to={{ pathname: "/login" }} />;
+      return navigate("/login");
     }
     return dataToMap.length || !filteredData.length ? (
       <div className="container-fluid">

@@ -2,7 +2,7 @@
 /* eslint-disable react/destructuring-assignment */
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Link, Redirect } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import propTypes from "prop-types";
 import { checkoutVisitor } from "../redux/visitorRegistration/actions";
 
@@ -10,7 +10,8 @@ class CheckOutToken extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      visitID: ""
+      visitID: "",
+      navigate: useNavigate()
     };
   }
 
@@ -43,7 +44,7 @@ class CheckOutToken extends Component {
   render() {
     const { isVisitorCheckOutLoading, isAuth } = this.props;
     if (!isAuth) {
-      return <Redirect to={{ pathname: "/login" }} />;
+      return navigate("/login");
     }
     return (
       <>

@@ -1,11 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import propTypes from "prop-types";
-import {
-  fBaseAddVisitDetails,
-  fBaseVisitorRegister
-} from "../config/fbaseConfig";
+import {database} from "../config";
 import { fetchVisitDetails } from "../redux/visitorRegistration/actions";
 
 class CheckInCheckOutMain extends Component {
@@ -13,7 +10,8 @@ class CheckInCheckOutMain extends Component {
     super(props);
     this.state = {
       gotoCheckin: false,
-      gotoCheckout: false
+      gotoCheckout: false,
+      navigate: useNavigate()
     };
   }
 
@@ -48,7 +46,7 @@ class CheckInCheckOutMain extends Component {
     const { gotoCheckin, gotoCheckout } = this.state;
     const { history, isAuth } = this.props;
     if (!isAuth) {
-      return <Redirect to={{ pathname: "/login" }} />;
+      return navigate("/login");
     }
     if (!gotoCheckin && !gotoCheckout) {
       return (
