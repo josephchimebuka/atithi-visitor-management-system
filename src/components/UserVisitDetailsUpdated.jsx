@@ -1,12 +1,14 @@
 /* eslint-disable camelcase */
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import propTypes from "prop-types";
 import { addVisitDetails } from "../redux/visitorRegistration/actions";
 import NewVisitDetails from "./common/NewVisitDetails";
 import ShowLoading from "./common/ShowLoading";
 
+
+const navigate =  useNavigate()
 class UserVisitDetailsUpdated extends Component {
   constructor() {
     super();
@@ -95,7 +97,7 @@ class UserVisitDetailsUpdated extends Component {
     const { visitorName, imageUrl } = this.state;
     const { isVisitCheckInLoading, isAuth } = this.props;
     if (!isAuth) {
-      return <Redirect to={{ pathname: "/login" }} />;
+      return navigate('/login');
     }
     return isVisitCheckInLoading ? (
       <ShowLoading label="Your visit data is being stored.." />

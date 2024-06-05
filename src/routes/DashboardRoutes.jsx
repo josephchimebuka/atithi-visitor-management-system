@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Redirect } from "react-router-dom";
+import { Route, useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import Dashboard from "../components/Dashboard/Dashboard";
@@ -10,6 +10,7 @@ import NavBar from "../components/Dashboard/NavBar";
 
 const DashboardRoutes = props => {
   const { isAuth } = props;
+  const navigate = useNavigate()
   return isAuth ? (
     <>
       <Route path="/dash" render={NavBar} />
@@ -19,7 +20,7 @@ const DashboardRoutes = props => {
       <Route path="/dash/reports" render={() => <Reports />} />
     </>
   ) : (
-    <Redirect to="/login" />
+   navigate('/login')
   );
 };
 

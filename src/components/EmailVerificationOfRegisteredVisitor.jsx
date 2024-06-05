@@ -4,10 +4,13 @@
 /* eslint-disable react/prop-types */
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { checkForExistingVisitor } from "../redux/visitorRegistration/actions";
 import ShowLoading from "./common/ShowLoading";
 
+
+
+const navigate = useNavigate()
 class EmailVerificationOfRegisteredVisitor extends Component {
   constructor(props) {
     super(props);
@@ -40,7 +43,7 @@ class EmailVerificationOfRegisteredVisitor extends Component {
     const { isCheckExistingVisitorLoading, isAuth } = this.props;
     console.log("isCheckExistingVisitorLoading", isCheckExistingVisitorLoading);
     if (!isAuth) {
-      return <Redirect to={{ pathname: "/login" }} />;
+      return navigate('/login');
     }
     return isCheckExistingVisitorLoading ? (
       <ShowLoading label={"Verifying email.."} />

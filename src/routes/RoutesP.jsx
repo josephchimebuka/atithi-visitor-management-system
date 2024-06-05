@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from "react";
 import propTypes from "prop-types";
-import { Route, Switch } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import { connect } from "react-redux";
 import DashboardRoutes from "./DashboardRoutes";
 import Login from "../components/Login";
@@ -26,18 +26,18 @@ const Routes = props => {
   return !isAuth ? (
     <>
       <Route path="/" component={NavBarPublic} />
-      <Switch>
+      <Routes>
         <Route path="/" exact render={() => <Home />} />
         <Route path="/dash" render={() => <DashboardRoutes />} />
         <Route path="/login" render={() => <Login history={history} />} />
         <Route path="/register" render={() => <Register history={history} />} />
         <Route render={() => <NoMatch />} />
-      </Switch>
+      </Routes>
     </>
   ) : (
     <>
       <Route path="/" component={NavBarPublic} />
-      <Switch>
+      <Routes>
         <Route
           path="/visitor_registration"
           render={() => (
@@ -84,7 +84,7 @@ const Routes = props => {
           path="/admin_dashboard"
           render={() => <AdminDashboard history={history} />}
         />
-      </Switch>
+      </Routes>
     </>
   );
 };

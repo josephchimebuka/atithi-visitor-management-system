@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import propTypes from "prop-types";
 import { addVisitor } from "../redux/visitorRegistration/actions";
 import VistorImageCapture from "./VistorImageCapture";
 import { saveImageUrl } from "../redux/imageCapture/actions";
 import ShowLoading from "./common/ShowLoading";
 
+
+const navigate =  useNavigate()
 class VisitorRegistration extends Component {
   constructor(props) {
     super(props);
@@ -66,7 +68,7 @@ class VisitorRegistration extends Component {
     console.log("isAddVisitorLoading", isAddVisitorLoading);
 
     if (!isAuth) {
-      return <Redirect to={{ pathname: "/login" }} />;
+      return navigate('/login');
     }
 
     if (isImageCaptured) {

@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from "react";
 import propTypes from "prop-types";
-import { Route, Switch } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import { connect } from "react-redux";
 import Login from "../components/Login";
 import VisitorRegistration from "../components/VisitorRegistration";
@@ -18,10 +18,10 @@ import CheckinSuccess from "../components/CheckinSuccess";
 import AdminDashboard from "../components/AdminDashboard";
 import Register from "../components/Register";
 
-const Routes = props => {
+const Route = props => {
   const { history, location, isAuth } = props;
   return (
-    <Switch>
+    <Routes>
       <Route path="/" exact render={() => <Home />} />
       <Route path="/login" render={() => <Login history={history} />} />
       <Route path="/register" render={() => <Register history={history} />} />
@@ -79,16 +79,16 @@ const Routes = props => {
         render={() => <AdminDashboard isAuth={isAuth} history={history} />}
       />
       <Route component={NoMatch} />
-    </Switch>
+    </Routes>
   );
 };
 
-Routes.defaultProps = {
+Route.defaultProps = {
   history: propTypes.object,
   location: propTypes.object
 };
 
-Routes.propTypes = {
+Route.propTypes = {
   history: propTypes.object,
   location: propTypes.object
 };
